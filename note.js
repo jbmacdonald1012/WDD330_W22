@@ -1,7 +1,7 @@
 function saveNote(){
     var currentDateAndTime = new Date()
-    var aNoteDescription = document.getElementById("description_input").value
-    var aNoteText = document.getElementById("note_editor").value
+    var aNoteDescription = document.getElementById("note-title").value
+    var aNoteText = document.getElementById("note_input").value
     var aCompleteNote = currentDateAndTime.toLocaleString() + "--" + aNoteDescription 
     aCompleteNote += "<p>" + aNoteText + "</p>"
 
