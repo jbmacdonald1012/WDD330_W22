@@ -3,13 +3,6 @@ form.addEventListener('submit', makeHero, false);
 
 form.addEventListener('submit',validate,false);
 
-function validate(event) {
-    const firstLetter = form.heroName.value[0];
-    if (firstLetter.toUpperCase() === 'X') {
-        event.preventDefault();
-        alert('Your name is not allowed to start with X!');
-    }
-}
 
 const label = form.querySelector('label');
 const error = document.createElement('div');
@@ -20,9 +13,17 @@ label.append(error);
 function validateInline() {
     const heroName = this.value.toUpperCase();
     if(heroName.startsWith('X')){
-    error.style.display = 'block';
+        error.style.display = 'block';
     } else {
-    error.style.display = 'none';
+        error.style.display = 'none';
+    }
+}
+
+function validate(event) {
+    const firstLetter = form.heroName.value[0];
+    if (firstLetter.toUpperCase() === 'X') {
+        event.preventDefault();
+        alert('Your name is not allowed to start with X!');
     }
 }
 

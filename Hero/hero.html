@@ -4,19 +4,19 @@
 <head>
     <meta charset='utf-8'>
     <title>Hero Form</title>
-    <style>
-        .error{
-            background: #f99;
-            border: #900 1px solid;
-            display: none;
-        }
-    </style>
+   <style>
+       .error{
+    background: #f99;
+    border: #900 1px solid;
+    display: none;
+}
+   </style>
 </head>
 
 <body>
     <form id='hero'>
         <label for='heroName'>Name:
-            <input type='text' id='heroName' name='heroName' autofocus placeholder='Your Super Hero Name' maxlength=32>
+            <input type='text' id='heroName' name='heroName' autofocus placeholder='Your Super Hero Name' maxlength=32 required>
         </label>
         <label for='realName'>Real Name:
             <input type='password' name='realName' id='realName'></label>
@@ -58,9 +58,12 @@
                 <option value='Star City'>Star City</option>
             </select>
         </label>
+        <br>
         <label for='origin'>Origin Story:
+        <br>
             <textarea id='origin' name='origin' rows='20' cols='60'></textarea>
         </label>
+        <br>
         <button type='submit'>Submit</button>
         <button type='reset'>Reset</button>
     </form>
