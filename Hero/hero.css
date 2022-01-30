@@ -1,5 +1,7 @@
-.error{
-    background: #f99;
-    border: #900 1px solid;
-    display: none;
+label #origin {
+    display: block;
+}
+
+textarea #origin{
+    display: block;
 }
