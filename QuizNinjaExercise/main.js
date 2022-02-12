@@ -3,42 +3,120 @@ const quiz = [
     { name: "Superman",realName: "Clark Kent" },
     { name: "Wonder Woman",realName: "Diana Prince" },
     { name: "Batman",realName: "Bruce Wayne" },
+    { name: "The Hulk",realName: "Bruce Banner" },
+    { name: "Spider-man",realName: "Peter Parker" },
+    { name: "Cyclops",realName: "Scott Summers" }
 ];
+
+// View Object
+const view = {
+    score: document.querySelector('#score strong'),
+    timer: document.querySelector('#timer strong'),
+    start: document.getElementById('start'),
+    question: document.getElementById('question'),
+    result: document.getElementById('result'),
+    info: document.getElementById('info'),
+    response: document.querySelector('#response'),
+    
+    render(target,content,attributes) {
+        for(const key in attributes) {
+            target.setAttribute(key, attributes[key]);
+        }
+
+        target.innerHTML = content;
+    },
+
+    show(element){
+        element.style.display = 'block';
+    },
+    hide(element){
+        element.style.display = 'none';
+    },
+
+    setup(){
+        this.show(this.question);
+        this.show(this.response);
+        this.show(this.result);
+        this.hide(this.start);
+        this.render(this.score,game.score);
+        this.render(this.result,'');
+        this.render(this.info,'');
+    },
+
+    buttons(array){
+        return array.map(value => `<button>${value}</button>`).join('');
+    },
+
+    teardown(){
+        this.hide(this.question);
+        this.hide(this.response);
+        this.show(this.start);
+    }
+};
 
 // game object
 
 /* inside the object, "this" replaces "game", 
-outside the object any called function that's inside the 
-game object requires the prefix 'game.' */
+outside the object any time a function that's inside the 
+game object gets called it requires the prefix 'game.' */
 const game = {
     start(quiz){
-        this.questions = [...quiz];
+        console.log('start() invoked');
         this.score = 0;
-        // main game loop
-        for(const question of this.questions){
-        this.question = question;
+        this.secondsRemaining = 20;
+        this.timer = setInterval( this.countdown , 1000 );
+        this.questions = [...quiz];
+        view.setup();
         this.ask();
-        }
-        // end of main game loop
-        this.gameOver();
     },
-    ask(){
+
+    ask(name){
+        console.log('ask() invoked');
+        if(this.questions.length > 2) {
+        shuffle(this.questions);
+        this.question = this.questions.pop();
+        const options = [this.questions[0].realName, this.questions[1].realName, this.question.realName];
+        shuffle(options);
         const question = `What is ${this.question.name}'s real name?`;
-        const response =  prompt(question);
-        this.check(response);
+        view.render(view.question,question);
+        view.render(view.response,view.buttons(options));
+        }
+        else {
+        this.gameOver();
+        }
     },
-    check(response){
+
+    check(event){
+        console.log('check(event) invoked');
+        const response = event.target.textContent;
         const answer = this.question.realName;
         if(response === answer){
-        alert('Correct!');
+        view.render(view.result,'Correct!',{'class':'correct'});
         this.score++;
+        view.render(view.score,this.score);
         } else {
-        alert(`Wrong! The correct answer was ${answer}`);
+        view.render(view.result,`Wrong! The correct answer was ${answer}`,{'class':'wrong'});
         }
+        this.ask();
     },
+
     gameOver(){
-        alert(`Game Over, you scored ${this.score} point${this.score !== 1 ? 's' : ''}`);
+        console.log('check(event) invoked');
+        view.render(view.info,`Game Over, you scored ${this.score} point${this.score !== 1 ? 's' : ''}`);
+        view.teardown();
+        clearInterval(this.timer);
+    },
+
+    countdown() {
+        game.secondsRemaining--;
+        view.render(view.timer,game.secondsRemaining);
+        if(game.secondsRemaining < 0) {
+            game.gameOver();
+        }
     }
+
 }
 
-game.start(quiz);
+view.start.addEventListener('click', () => game.start(quiz), false);
+view.response.addEventListener('click', (event) => game.check(event), false);
+
