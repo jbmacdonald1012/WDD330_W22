@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Roboto&display=swap');
+
+body{
+    font-family: 'Lato', sans-serif;
+    max-width: fit-content;
+
+}
+
+section{
+    border: 1px solid black;
+    padding: 10px;
+}
+
+h1{
+    font-family: 'Roboto', sans-serif; 
+}
+
+#itemsList{
+    list-style: none;
+}
+
+#itemsList li {
+    border: 1px solid black;
+    padding: 5px;
+    margin-top: 5px;
+}
+
+#toDoInput{
+    width: 85%;
+}
+
+.taskSortList{
+    list-style: none;
+}
+
+.hidden{
+    display: none;
+}
