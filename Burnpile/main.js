@@ -1,4 +1,4 @@
-import ToDo from "./ToDos.js";
+import ToDo from "../Challenge1/Todos.js";
 
 const myToDo = new ToDo();
 window.addEventListener("load", () => {

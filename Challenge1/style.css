@@ -1,38 +1,94 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Roboto&display=swap');
 
-body{
-    font-family: 'Lato', sans-serif;
-    max-width: fit-content;
-
+*{
+    padding: 0;
+    margin: 0;
 }
 
-section{
-    border: 1px solid black;
-    padding: 10px;
+body{
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    font-family: Lato, sans-serif;
+    background: rgb(34,193,195);
+    background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
 }
 
 h1{
     font-family: 'Roboto', sans-serif; 
 }
 
-#itemsList{
-    list-style: none;
+ul {
+   list-style-type: none; 
 }
 
-#itemsList li {
-    border: 1px solid black;
-    padding: 5px;
-    margin-top: 5px;
-}
+.container {
+    min-width: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
 
-#toDoInput{
-    width: 85%;
-}
 
-.taskSortList{
-    list-style: none;
-}
+.todo-form {
+    margin: 40px 0px;
+  }
 
-.hidden{
-    display: none;
-}
+.todo-input {
+    width: 250px;
+    outline: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin-right: 10px;
+    font-size: 1rem;
+  }
+
+.add-button {
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    padding: 7px;
+    font-size: 1.5rem;
+  }
+
+.todo-item {
+    min-width: 350px;
+  }
+
+.item {
+    padding: 10px;
+    font-size: 1.1rem;
+    border: .5px solid black;
+  }
+
+.item:first-child {
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+  }
+
+.item:last-child {
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+  }
+
+.checkbox {
+    margin-right: 10px;
+  }
+
+.checked { 
+    text-decoration: line-through;
+  }
+
+  .delete {
+    float: right;
+    border: none;
+    outline: none;
+    border-radius: 7px;
+    padding: 2px 5px;
+    margin-left: 10px;
+    font-size: 1.1rem;
+    font-weight: 550;
+  }
+
