@@ -11,7 +11,7 @@ const todoInput = document.querySelector('.todo-input');
 
 let todos = [];
 
-todoForm.addEventListener('submit', function(event) {
+todoForm.addEventListener('click', function(event) {
     event.preventDefault();
     addTodo(todoInput.value);
 });
