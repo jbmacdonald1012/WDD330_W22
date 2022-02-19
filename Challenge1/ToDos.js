@@ -1,13 +1,10 @@
-const todoItemsList = document.querySelector('.todo-item');
-        
-//select the form
+//Selectors for HTML elements
+const todoItemsList = document.querySelector('.todo-item');       
 const todoForm = document.querySelector('.todo-form');
-
-// select to do list input
 const todoInput = document.querySelector('.todo-input');
 
 
-let todos = [];
+let toDoList = [];
 
 todoForm.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -26,19 +23,19 @@ function addTodo(item) {
       completed: false
     };
 
-    todos.push(todo);
-    addToLocalStorage(todos); 
+    toDoList.push(todo);
+    addToLocalStorage(toDoList); 
 
     todoInput.value = '';
   }
 }
 
 
-function renderTodos(todos) {
+function renderTodos(toDoList) {
  
   todoItemsList.innerHTML = '';
 
-  todos.forEach(function(item) {
+  toDoList.forEach(function(item) {
 
     const checked = item.completed ? 'checked': null;
 
@@ -62,31 +59,31 @@ li.innerHTML = `
 }
 
 
-function addToLocalStorage(todos) {
+function addToLocalStorage(toDoList) {
   
-  localStorage.setItem('todos', JSON.stringify(todos));
+  localStorage.setItem('toDoList', JSON.stringify(toDoList));
   
-  renderTodos(todos);
+  renderTodos(toDoList);
 }
 
 function getFromLocalStorage() {
   
-  const reference = localStorage.getItem('todos');
+  const reference = localStorage.getItem('toDoList');
   
   if (reference) {
-    todos = JSON.parse(reference);
-    renderTodos(todos);
+    toDoList = JSON.parse(reference);
+    renderTodos(toDoList);
   }
 }
 
 function toggle(id) {
-  todos.forEach(function(item) {
+  toDoList.forEach(function(item) {
     if (item.id == id) {
       item.completed = !item.completed;
     }
   });
 
-addToLocalStorage(todos);
+addToLocalStorage(toDoList);
 }
 
 function deleteTodo(id) {
@@ -99,7 +96,7 @@ function deleteTodo(id) {
 
 getFromLocalStorage();
 
-todoItemsList.addEventListener('click', function(event) {
+todoItemsList.addEventListener('click', (event) => {
   
   if (event.target.type === 'checkbox') {
     toggle(event.target.parentElement.getAttribute('data-key'));
@@ -109,4 +106,47 @@ todoItemsList.addEventListener('click', function(event) {
     deleteTodo(event.target.parentElement.getAttribute('data-key'));
   }
 });
+
+function totalTasksUpdate(toDoList){
+  const totalTasks = document.getElementById('filters');
+    if (toDoList != null) {
+      totalTasks.innerHTML = `${toDoList.length} task(s) to complete.`;
+    }
+    else {
+      totalTasks.innerHTML = `No current tasks to complete`;
+    }
+}
+
+function currentActiveTasks(toDoList) {
+  const totalTasks = document.getElementById('filters');
+  let count = 0;
+
+    toDoList.forEach( (item) => {
+      if(item.completed != true) {
+        count++;
+        totalTasks.innerHTML = `${count} active tasks to complete`;
+      }
+      
+      if (count == 0) {
+        totalTasks.innerHTML = `${count} active tasks to complete`;
+      }
+    });
+}
+
+function finishedTasks (toDoList) {
+  const totalTasks = document.getElementById('filters');
+  let completeCounter = 0;
+
+  toDoList.forEach( (item) => {
+      if (item.completed == true) {
+        completeCounter++;
+        totalTasks.innerHTML = `${completeCounter} tasks completed`
+      }
+
+      if (completeCounter == 0) {
+        totalTasks.innerHTML = `You have completed ${completeCounter} tasks`
+      }
+  });
+
+}
 

@@ -23,6 +23,12 @@
             <button type="submit" class="add-button"><i class='bx bxs-plus-square'></i></button>
         </form>
 
+        <div id="filters"></div>
+        <div class="filterButtons">
+            <button type="button" class="total-btn" onclick="totalTasksUpdate(toDoList)">Total Tasks</button>
+            <button type="button" class="active-btn" onclick="currentActiveTasks(toDoList)">Active Tasks</button>
+            <button type="button" class="done-btn" onclick="finishedTasks(toDoList)">Completed Tasks</button>
+        </div>
     </div>
     <script src="Todos.js"></script>
 </body>
