@@ -1,6 +1,4 @@
-
-// select list of items
-const todoItemsList = document.querySelector('.todo-item')
+const todoItemsList = document.querySelector('.todo-item');
         
 //select the form
 const todoForm = document.querySelector('.todo-form');
@@ -11,10 +9,11 @@ const todoInput = document.querySelector('.todo-input');
 
 let todos = [];
 
-todoForm.addEventListener('click', function(event) {
-    event.preventDefault();
-    addTodo(todoInput.value);
+todoForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  addTodo(todoInput.value); 
 });
+
 
 
 function addTodo(item) {
