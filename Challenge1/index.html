@@ -76,7 +76,7 @@
             li.setAttribute('class', 'item');
             
             li.setAttribute('data-key', item.id);
-            
+
             li.setAttribute('delete', item.id);
             
             if (item.completed === true) {
@@ -100,7 +100,7 @@
           renderTodos(toDoList);
         }
         
-        function getFromLocalStorage() {
+        function getFromLocalStorage(todos) {
           
           const reference = localStorage.getItem('toDoList');
           
