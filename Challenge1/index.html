@@ -139,7 +139,7 @@
         todoItemsList.addEventListener('click', (event) => {
             
             if (event.target.classList.contains('delete')) {
-                deleteTodo(event.target.parentElement.getAttribute('data-key'));
+                deleteTodo(event.target.parentElement.getElementById('data-key'));
             }
 
         });
