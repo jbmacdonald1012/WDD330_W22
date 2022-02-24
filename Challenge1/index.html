@@ -100,7 +100,7 @@
           renderTodos(toDoList);
         }
         
-        function getFromLocalStorage(todos) {
+        function getFromLocalStorage() {
           
           const reference = localStorage.getItem('toDoList');
           
@@ -121,14 +121,14 @@
         }
         
         function deleteTodo(id) {
-          todos = todos.filter(function(item) {
+          todos = toDoList.filter(function(item) {
             return item.id != id;
           });
         
           addToLocalStorage(todos);
         }
         
-        getFromLocalStorage(todos);
+        getFromLocalStorage();
         
         todoItemsList.addEventListener('click', (event) => {
           
