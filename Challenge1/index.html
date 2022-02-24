@@ -141,7 +141,7 @@
         todoItemsList.addEventListener('click', (event) => {
             
             if (event.target.classList.contains('delete')) {
-                deleteTodo(event.target.parentElement.getAttribute('delete'));
+                deleteTodo(event.target.parentElement.getAttribute('id'));
             }
 
         });
