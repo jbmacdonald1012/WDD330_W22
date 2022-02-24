@@ -77,6 +77,8 @@
             
             li.setAttribute('data-key', item.id);
             
+            li.setAttribute('delete', item.id);
+            
             if (item.completed === true) {
               li.classList.add('checked');
             }
@@ -139,7 +141,7 @@
         todoItemsList.addEventListener('click', (event) => {
             
             if (event.target.classList.contains('delete')) {
-                deleteTodo(event.target.parentElement.getElementById('data-key'));
+                deleteTodo(event.target.parentElement.getAttribute('delete'));
             }
 
         });
