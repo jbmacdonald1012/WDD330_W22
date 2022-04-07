@@ -51,7 +51,7 @@ function renderTodos(toDoList) {
 li.innerHTML = `
       <input type="checkbox" class="checkbox" ${checked}>
       ${item.name}
-      <button type="button" class="delete">&times;</i></button>
+      <button type="button" class="delete">X</button>
     `;
     // finally add the <li> to the <ul>
     todoItemsList.append(li);
