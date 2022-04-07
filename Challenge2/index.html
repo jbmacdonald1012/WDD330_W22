@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Countdown Timer</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="main.js" defer></script>
+</head>
+<body>
+        <div class="timers">
+            <div class="baseTimers">
+                <button data-time="30" class="baseTimerButton">30 seconds</button>
+                <button data-time="60" class="baseTimerButton">1 minute</button>
+                <button data-time="300" class="baseTimerButton">5 minutes</button>
+                <button data-modal-target="#modal" class="customTimer">Custom Timer</button>
+            </div>
+        </div>
+
+    <div class="modal" id="modal">
+        <div class="modal-header">
+            <div class="title">Custom Timer</div>
+            <button data-close-button class="close-button">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form class="customTimerForm" name="customTimerForm">
+                <input type="text" name="minutes" placeholder="Enter a time">
+            </form>
+        </div>
+    </div>
+
+    
+    <div class="timer">
+        <div class="display">
+            <h1 class="timeLeft"></h1>
+            <p class="expectedEndTime"></p>
+        </div>
+    </div>
+
+    <div class="alarmSection">
+        <select name="voice" id="voices">
+            <option value="">Select a voice</option>
+        </select>
+    </div>
+
+    <footer>
+        <div class="controlTimer">
+            <button class="pauseButton">Pause</button>
+            <button class="resumeButton">Resume</button>
+        </div>
+    </footer>
+    
+</body>
+</html>

@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital@1&display=swap');
+
+html {
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+body {
+    background-image: url("./milkyway_mountains.jpg");
+    text-align: center;
+    font-family: 'Kanit', sans-serif;
+    margin: 0;
+}
+
+.modal {
+    position: fixed;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
+    border: 1px solid black;
+    border-radius: 5px;
+    z-index: 10;
+    background-color: beige;
+    width: 400px;
+    max-width: 80%;
+    padding: 10px;
+}
+
+.modal.active{
+    transform: translate(-50%, -50%) scale(1);
+
+}
+
+.modal-header {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+}
+
+.modal-header .title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.modal-header .close-button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.modal-body{
+    padding: 10px 15px;
+}
+
+
+.display {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+h1{
+    font-weight: 400;
+    font-size: 20rem;
+    margin: 0;
+    color: white;
+    text-shadow: 10px 10px 0 rgba(0,0,0,0.05);
+}
+
+p {
+    font-weight: 400;
+    font-size: 10rem;
+    color: white;
+    margin: 0;
+}
+
+
+.baseTimers {
+    display: flex;
+}
+
+.baseTimers > * {
+    flex: 1;
+    min-height: 10vh;
+    background-color: cornflowerblue;
+    color: white;
+    font-family: 'Kanit' sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.controlTimer {
+    display: flex;
+}
+
+.controlTimer > * {
+    flex: 1;
+    min-height: 10vh;
+    background-color: cornflowerblue;
+    color: white;
+    font-family: 'Kanit' sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.display {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.hidden{
+    display: none;
+}
+
+.alarmSection{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+    padding: 50px;
+}
+
+.alarmSection > * {
+    min-height: 10vh;
+    background-color: cornflowerblue;
+    color: white;
+    font-family: 'Kanit' sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+}
