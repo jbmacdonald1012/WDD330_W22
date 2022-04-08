@@ -7,6 +7,7 @@
     <title>To Do List</title>
     <link rel="stylesheet" href="style.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <script src="main.js" defer></script>
 </head>
 
 <body>
@@ -16,7 +17,7 @@
         <h1>To Do List</h1>
 
 
-        <ul class="todo-item"></ul>
+        <ul class="todo-items"></ul>
 
         <form class="todo-form">
             <input type="text" class="todo-input" placeholder="What I need to do...">
@@ -25,171 +26,11 @@
 
         <div id="filters"></div>
         <div class="filterButtons">
-            <button type="button" class="total-btn" onclick="totalTasksUpdate(toDoList)">Total Tasks</button>
-            <button type="button" class="active-btn" onclick="currentActiveTasks(toDoList)">Active Tasks</button>
-            <button type="button" class="done-btn" onclick="finishedTasks(toDoList)">Completed Tasks</button>
+            <button type="button" class="total-btn" onclick="totalTasksUpdate(todos)">Total Tasks</button>
+            <button type="button" class="active-btn" onclick="currentActiveTasks(todos)">Active Tasks</button>
+            <button type="button" class="done-btn" onclick="finishedTasks(todos)">Completed Tasks</button>
         </div>
     </div>
-    <script>//Selectors for HTML elements
-        const todoItemsList = document.querySelector('.todo-item');       
-        const todoForm = document.querySelector('.todo-form');
-        const todoInput = document.querySelector('.todo-input');
-        
-        
-        let toDoList = [];
-        
-        todoForm.addEventListener('submit', (event) => {
-          event.preventDefault();
-          addTodo(todoInput.value); 
-        });
-        
-        
-        
-        function addTodo(item) {
-          
-          if (item !== '') {
-            
-            const todo = {
-              id: Date.now(),
-              name: item,
-              completed: false
-            };
-        
-            toDoList.push(todo);
-            addToLocalStorage(toDoList); 
-        
-            todoInput.value = '';
-          }
-        }
-        
-        
-        function renderTodos(toDoList) {
-         
-          todoItemsList.innerHTML = '';
-        
-          toDoList.forEach(function(item) {
-        
-            const checked = item.completed ? 'checked': null;
-        
-            const li = document.createElement('li');
-            
-            li.setAttribute('class', 'item');
-            
-            li.setAttribute('data-key', item.id);
-
-            li.setAttribute('id', 'delete');
-            
-            if (item.completed === true) {
-              li.classList.add('checked');
-            }
-        li.innerHTML = `
-              <input type="checkbox" class="checkbox" ${checked}>
-              ${item.name}
-              <button type="button" class="delete" ><i class='bx bxs-trash'></i></button>
-            `;
-            // finally add the <li> to the <ul>
-            todoItemsList.append(li);
-          });
-        }
-        
-        
-        function addToLocalStorage(toDoList) {
-          
-          localStorage.setItem('toDoList', JSON.stringify(toDoList));
-          
-          renderTodos(toDoList);
-        }
-        
-        function getFromLocalStorage() {
-          
-          const reference = localStorage.getItem('toDoList');
-          
-          if (reference) {
-            toDoList = JSON.parse(reference);
-            renderTodos(toDoList);
-          }
-        }
-        
-        function toggle(id) {
-          toDoList.forEach(function(item) {
-            if (item.id == id) {
-              item.completed = !item.completed;
-            }
-          });
-        
-        addToLocalStorage(toDoList);
-        }
-        
-        function deleteTodo(id) {
-          todos = toDoList.filter(function(item) {
-            return item.id != id;
-          });
-        
-          addToLocalStorage(todos);
-        }
-        
-        getFromLocalStorage();
-        
-        todoItemsList.addEventListener('click', (event) => {
-          
-          if (event.target.type === 'checkbox') {
-            toggle(event.target.parentElement.getAttribute('data-key'));
-          }
-        
-        });
-
-        todoItemsList.addEventListener('click', (event) => {
-            
-            if (event.target.classList.contains('delete')) {
-                deleteTodo(event.target.parentElement.getAttribute('id'));
-            }
-
-        });
-        
-        function totalTasksUpdate(toDoList){
-          const totalTasks = document.getElementById('filters');
-            if (toDoList != null) {
-              totalTasks.innerHTML = `${toDoList.length} task(s) to complete.`;
-            }
-            else {
-              totalTasks.innerHTML = `No current tasks to complete`;
-            }
-        }
-        
-        function currentActiveTasks(toDoList) {
-          const totalTasks = document.getElementById('filters');
-          let count = 0;
-        
-            toDoList.forEach( (item) => {
-              if(item.completed != true) {
-                count++;
-                totalTasks.innerHTML = `${count} active tasks to complete`;
-              }
-              
-              if (count == 0) {
-                totalTasks.innerHTML = `${count} active tasks to complete`;
-              }
-            });
-        }
-        
-        function finishedTasks (toDoList) {
-          const totalTasks = document.getElementById('filters');
-          let completeCounter = 0;
-        
-          toDoList.forEach( (item) => {
-              if (item.completed == true) {
-                completeCounter++;
-                totalTasks.innerHTML = `${completeCounter} tasks completed`
-              }
-        
-              if (completeCounter == 0) {
-                totalTasks.innerHTML = `You have completed ${completeCounter} tasks`
-              }
-          });
-        
-        }
-        
-        </script>
 </body>
 
 </html>

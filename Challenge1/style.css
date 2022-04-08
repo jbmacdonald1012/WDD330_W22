@@ -53,7 +53,7 @@ ul {
     font-size: 1.5rem;
   }
 
-.todo-item {
+.todo-items {
     min-width: 350px;
   }
 
@@ -81,14 +81,14 @@ ul {
     text-decoration: line-through;
   }
 
-  .delete {
-    float: right;
-    border: none;
-    outline: none;
-    border-radius: 7px;
-    padding: 2px 5px;
-    margin-left: 10px;
-    font-size: 1.1rem;
-    font-weight: 550;
-  }
+.delete-button {
+  float: right;
+  border: none;
+  outline: none;
+  border-radius: 7px;
+  padding: 2px 5px;
+  margin-left: 10px;
+  font-size: 1.1rem;
+  font-weight: 550;
+}
 

@@ -1,17 +1,15 @@
 //Selectors for HTML elements
-const todoItemsList = document.querySelector('.todo-item');       
 const todoForm = document.querySelector('.todo-form');
 const todoInput = document.querySelector('.todo-input');
+const todoItemsList = document.querySelector('.todo-items');       
 
 
-let toDoList = [];
+let todos = [];
 
-todoForm.addEventListener('submit', (event) => {
+todoForm.addEventListener('submit', function (event) {
   event.preventDefault();
   addTodo(todoInput.value); 
 });
-
-
 
 function addTodo(item) {
   
@@ -23,19 +21,19 @@ function addTodo(item) {
       completed: false
     };
 
-    toDoList.push(todo);
-    addToLocalStorage(toDoList); 
+    todos.push(todo);
+    addToLocalStorage(todos); 
 
     todoInput.value = '';
   }
 }
 
 
-function renderTodos(toDoList) {
+function renderTodos(todos) {
  
   todoItemsList.innerHTML = '';
 
-  toDoList.forEach(function(item) {
+  todos.forEach(function(item) {
 
     const checked = item.completed ? 'checked': null;
 
@@ -51,7 +49,7 @@ function renderTodos(toDoList) {
 li.innerHTML = `
       <input type="checkbox" class="checkbox" ${checked}>
       ${item.name}
-      <button type="button" class="delete">X</button>
+      <button type="button" class="delete-button">&times;</button>
     `;
     // finally add the <li> to the <ul>
     todoItemsList.append(li);
@@ -59,69 +57,70 @@ li.innerHTML = `
 }
 
 
-function addToLocalStorage(toDoList) {
+function addToLocalStorage(todos) {
   
-  localStorage.setItem('toDoList', JSON.stringify(toDoList));
+  localStorage.setItem('todos', JSON.stringify(todos));
   
-  renderTodos(toDoList);
+  renderTodos(todos);
 }
 
 function getFromLocalStorage() {
   
-  const reference = localStorage.getItem('toDoList');
+  const reference = localStorage.getItem('todos');
   
   if (reference) {
-    toDoList = JSON.parse(reference);
-    renderTodos(toDoList);
+    todos = JSON.parse(reference);
+    renderTodos(todos);
   }
 }
 
+
 function toggle(id) {
-  toDoList.forEach(function(item) {
+  todos.forEach(function(item) {
     if (item.id == id) {
       item.completed = !item.completed;
     }
   });
-
-addToLocalStorage(toDoList);
+  
+  addToLocalStorage(todos);
 }
 
 function deleteTodo(id) {
   todos = todos.filter(function(item) {
     return item.id != id;
   });
-
+  
   addToLocalStorage(todos);
 }
 
 getFromLocalStorage();
 
-todoItemsList.addEventListener('click', (event) => {
+todoItemsList.addEventListener('click', function (event) {
   
   if (event.target.type === 'checkbox') {
     toggle(event.target.parentElement.getAttribute('data-key'));
   }
 
-  if (event.target.classList.contains('delete')) {
+  if (event.target.classList.contains('delete-button')) {
     deleteTodo(event.target.parentElement.getAttribute('data-key'));
   }
 });
 
-function totalTasksUpdate(toDoList){
+function totalTasksUpdate(todos){
   const totalTasks = document.getElementById('filters');
-    if (toDoList != null) {
-      totalTasks.innerHTML = `${toDoList.length} task(s) to complete.`;
+    if (todos != null) {
+      totalTasks.innerHTML = `${todos.length} task(s) to complete.`;
     }
     else {
       totalTasks.innerHTML = `No current tasks to complete`;
     }
 }
 
-function currentActiveTasks(toDoList) {
+function currentActiveTasks(todos) {
   const totalTasks = document.getElementById('filters');
   let count = 0;
 
-    toDoList.forEach( (item) => {
+    todos.forEach( (item) => {
       if(item.completed != true) {
         count++;
         totalTasks.innerHTML = `${count} active tasks to complete`;
@@ -133,11 +132,11 @@ function currentActiveTasks(toDoList) {
     });
 }
 
-function finishedTasks (toDoList) {
+function finishedTasks (todos) {
   const totalTasks = document.getElementById('filters');
   let completeCounter = 0;
 
-  toDoList.forEach( (item) => {
+  todos.forEach( (item) => {
       if (item.completed == true) {
         completeCounter++;
         totalTasks.innerHTML = `${completeCounter} tasks completed`
