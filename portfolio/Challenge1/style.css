@@ -23,6 +23,10 @@ ul {
    list-style-type: none; 
 }
 
+a {
+  text-decoration: none;
+}
+
 .container {
     min-width: 700px;
     display: flex;
